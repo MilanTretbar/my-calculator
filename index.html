@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator with History</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Basic Calculator</h1>
+        <form method="POST" action="/calculate">
+            <input type="number" name="num1" placeholder="Enter first number" required>
+            <input type="number" name="num2" placeholder="Enter second number" required>
+            <select name="operation" required>
+                <option value="add">Addition</option>
+                <option value="subtract">Subtraction</option>
+                <option value="multiply">Multiplication</option>
+                <option value="divide">Division</option>
+            </select>
+            <button type="submit">Calculate</button>
+        </form>
+        {% if result is not none %}
+            <h2>Result: {{ result }}</h2>
+        {% endif %}
+
+        <!-- Display the calculation history -->
+        <h2>History</h2>
+        <ul>
+            {% for entry in history %}
+                <li>{{ entry }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Button to clear the history -->
+        <form method="POST" action="/clear-history">
+            <button type="submit">Clear History</button>
+        </form>
+    </div>
+</body>
+</html>
